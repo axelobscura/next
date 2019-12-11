@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class Index extends Component {
   constructor(props){
@@ -8,13 +9,19 @@ class Index extends Component {
     }
   }
   static async getInitialProps({ req }) {
-    const userAgent = req ? req.headers['user-agent'] : navigator.userAgent;
-    return { userAgent }
+    const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
+    const {data} = res;
+    return { posts: data }
   }
   render(){
     return(
       <div>
-        <h1>Hola Amigos {this.props.userAgent}</h1>
+        <h1>Hola Amigos</h1>
+        <ul>
+          {this.props.posts.map(post => (
+            <li key={post.id}>{post.title}</li>
+          ))}
+        </ul>
       </div>
     )
   }
