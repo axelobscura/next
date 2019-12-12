@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node server1.js",
+    "dev": "node server2.js",
     "build": "next build",
-    "start": "MODE_ENV=production node server1.js"
+    "start": "MODE_ENV=production node server2.js"
   },
   "repository": {
     "type": "git",

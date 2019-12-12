@@ -5,29 +5,19 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
-  createServer((req, res) => {
-    // Be sure to pass `true` as the second argument to `url.parse`.
-    // This tells it to parse the query portion of the URL.
-    const parsedUrl = parse(req.url, true)
-    const { pathname, query } = parsedUrl;
+  const server = express();
 
-    if(pathname === "/chicken"){
-      app.render(req, res, "/contact", query);
-    } else {
-      handle(req, res, parsedUrl);
-    }
+  server.get("/post/:id", (req, res) => {
+    app.render(req, res, "/post", {id: req.params});
+  })
 
-    handle(req, res, parsedUrl)
-    //if (pathname === '/a') {
-    //  app.render(req, res, '/b', query)
-    //} else if (pathname === '/b') {
-    //  app.render(req, res, '/a', query)
-    //} else {
-    //  handle(req, res, parsedUrl)
-    //}
-  }).listen(3000, err => {
-    if (err) throw err
-    console.log('> Ready on http://localhost:3000')
+  server.get('*', (req, res) => {
+    return handle(req, res);
+  })
+
+  server.listen(3000, err => {
+    if(err) throw err;
+    console.log("Servong on 3000")
   })
 })
 
