@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
+    "dev": "node server1.js",
     "build": "next build",
-    "start": "next start"
+    "start": "MODE_ENV=production node server1.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
   "homepage": "https://github.com/axelobscura/next#readme",
   "dependencies": {
     "axios": "^0.19.0",
+    "express": "^4.17.1",
     "next": "^9.1.5",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
